@@ -10,7 +10,7 @@ function jwtSign(username,password){
     const passwordCheck = passwordSchema.safeParse(password);
 
     if(!(usernameCheck.success && passwordCheck.success)) return null;
-    const token = jwt.sign({usernameCheck}, jwtPassword)
+    const token = jwt.sign({username}, jwtPassword)
     return token; 
 }
 
@@ -18,8 +18,12 @@ const resSign = jwtSign("merin@gmail.com", "123456");
 console.log(resSign)
 
 function jwtVerify(token){
-    const verified = jwt.verify(token, jwtPassword);
-    if(verified.usernameCheck.success) return true;
+    try{
+    jwt.verify(token, jwtPassword);
+    return true;
+    } catch(e){
+        console.log("error occured")
+    }
     return false;
 }
 
