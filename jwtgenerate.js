@@ -10,7 +10,7 @@ function jwtSign(username,password){
     const passwordCheck = passwordSchema.safeParse(password);
 
     if(!(usernameCheck.success && passwordCheck.success)) return null;
-    const token = jwt.sign({usernameCheck}, jwtPassword)
+    const token = jwt.sign({username}, jwtPassword)
     return token; 
 }
 
